@@ -13,6 +13,7 @@ public class MvcUtil {
 	}
 	
 	public static void redirect(String url, HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException{
-		response.sendRedirect(url);
+		//response.sendRedirect(request.getContextPath()+"/WEB-INF/views/" + url + ".jsp");
+		response.sendRedirect(request.getContextPath()+url);
 	}
 }
