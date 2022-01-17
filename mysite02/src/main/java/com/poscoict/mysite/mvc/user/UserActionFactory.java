@@ -12,7 +12,11 @@ public class UserActionFactory extends ActionFactory {
 		
 		if("joinform".equals(actionName)) {
 			action = new JoinFormAction();
-		} else {
+		} else if("join".equals(actionName)){
+			action = new JoinAction();
+		}else if("joinsuccess".equals(actionName)){
+			action = new JoinSuccessAction();
+		}else {
 			//장난치는 경우
 			action = new MainAction();
 		}
