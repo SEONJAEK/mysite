@@ -6,6 +6,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.poscoict.mysite.dao.UserDao;
+import com.poscoict.mysite.vo.UserVo;
 import com.poscoict.web.mvc.Action;
 import com.poscoict.web.util.MvcUtil;
 
@@ -18,15 +20,16 @@ public class JoinAction implements Action {
 		String password = request.getParameter("password");
 		String gender = request.getParameter("gender");
 		
-//		UserVo vo = new UserVO();
-//		vo.setName(name);
-//		vo.setEmail(email);
-//		vo.setPassword(password);
-//		vo.setGender(gender);
-//		
-//		new UserDao().insert(vo);
+		UserVo vo = new UserVo();
+		vo.setName(name);
+		vo.setEmail(email);
+		vo.setPassword(password);
+		vo.setGender(gender);
 		
-		MvcUtil.redirect(request.getContextPath() +"user?a=joinsuccess", request, response);
+		System.out.println(vo);
 		
+		//new UserDao().insert(vo);
+		
+		MvcUtil.redirect(request.getContextPath() +"/user?a=joinsuccess", request, response);
 	}
 }

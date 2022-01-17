@@ -116,7 +116,7 @@ public class GuestbookDao {
 			
 			String sql =
 					" insert" +
-					"   into guestbook" +
+					" into guestbook" +
 					" values (null, ?, ?, ?, now())";
 			pstmt = conn.prepareStatement(sql);
 			
