@@ -50,7 +50,7 @@ public class UpdateAction implements Action {
 		updateInfo.setNo(no);
 		updateInfo.setName(name);
 		session.setAttribute("authUser", updateInfo);
-		MvcUtil.forward("/main/index", request, response);
+		MvcUtil.forward("main/index", request, response);
 	}
 
 }

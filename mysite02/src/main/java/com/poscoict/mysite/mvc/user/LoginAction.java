@@ -31,8 +31,8 @@ public class LoginAction implements Action {
 		//인증 처리(Session처리)
 		HttpSession session = request.getSession(true);//true:없으면 만들어주라.
 		session.setAttribute("authUser", authUser);
-		
-		MvcUtil.redirect(request.getContextPath(), request, response);
+		//이때는 redirect써야해? 아님 forward써야해?
+		MvcUtil.redirect("/user", request, response);
 	}
 
 }
