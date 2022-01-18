@@ -5,7 +5,16 @@
 	pageEncoding="UTF-8"%>
 <div id="navigation">
 	<ul>
-		<li><a href="${pageContext.request.contextPath}/user?a=updateform">안대혁</a></li>
+		
+		<c:choose>
+			<c:when test='${empty authUser }'>
+				<li><a href="">회원 정보 수정</a></li>
+			</c:when>
+			<c:otherwise>
+				<li><a href="${pageContext.request.contextPath}/user?a=updateform">${authUser.name }정보 수정</a></li>
+			</c:otherwise>
+		</c:choose>
+		
 		<li><a href="${pageContext.request.contextPath}/guestbook">방명록</a></li>
 		<li><a href="${pageContext.request.contextPath}/board">게시판</a></li>
 	</ul>

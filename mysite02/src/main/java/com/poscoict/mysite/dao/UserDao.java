@@ -202,5 +202,51 @@ public class UserDao {
 			return result;
 		}
 		
+		//findpassword
+		public UserVo findPassword(Long no) {
+			UserVo result = null;
+
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			try {
+				conn = getConnection();
+				
+				String sql =
+						"select password from user where no = ?";
+				pstmt = conn.prepareStatement(sql);
+				
+				pstmt.setLong(1, no);
+				
+				rs = pstmt.executeQuery();
+				if(rs.next()) {
+					
+					String password = rs.getString(1);
+					
+					result = new UserVo();
+					result.setPassword(password);
+				}
+				
+			} catch (SQLException e) {
+				System.out.println("error:" + e);
+			} finally {
+				try {
+					if(rs!= null) {
+						rs.close();
+					}
+					if(pstmt != null) {
+						pstmt.close();
+					}
+					if(conn != null) {
+						conn.close();
+					}
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}		
+			
+			return result;
+		}	
+		
 	
 }
