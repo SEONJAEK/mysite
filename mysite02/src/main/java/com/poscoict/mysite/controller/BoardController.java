@@ -14,6 +14,7 @@ public class BoardController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String actionName = request.getParameter("a");
+		System.out.println(actionName);
 		
 		ActionFactory af = new BoardActionFactory();
 		Action action = af.getAction(actionName);
@@ -21,6 +22,7 @@ public class BoardController extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request,response);
 	}
 
 }

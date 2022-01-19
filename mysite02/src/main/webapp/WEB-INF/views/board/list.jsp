@@ -14,7 +14,7 @@
 		<c:import url="/WEB-INF/views/includes/header.jsp"/>
 		<div id="content">
 			<div id="board">
-				<form id="search_form" action="" method="post">
+				<form id="search_form" action="${pageContext.servletContext.contextPath }/board" method="get">
 					<input type="text" id="kwd" name="kwd" value="">
 					<input type="submit" value="찾기">
 				</form>
@@ -26,12 +26,14 @@
 						<th>조회수</th>
 						<th>작성일</th>
 						<th>&nbsp;</th>
-					</tr>	
+					</tr>
+						
 					<!-- 찐 -->
+					<c:set var="count" value="${fn:length(boardList)}"/>
 					<c:forEach var="board" items="${boardList }" varStatus="status">
 					<tr>
-						<td>${status.index +1}</td>
-						<td style="text-align:left; padding-left:0px"><a href="${pageContext.servletContext.contextPath }/board?a=view&no=${board.no}">${board.title }</a></td>
+						<td>${count-status.index}</td>
+						<td style = "text-align:left;padding-left:${(board.depth-1)*20 }px"><c:if test="${board.depth > 1 }"><img src="${pageContext.servletContext.contextPath }/assets/images/reply.png" /></c:if><a href="${pageContext.servletContext.contextPath }/board?a=view&no=${board.no}">${board.title }</a></td>
 						<td>${board.userName }</td>
 						<td>${board.hit }</td>
 						<td>${board.regDate }</td>
@@ -42,7 +44,7 @@
 					</tr>
 					</c:forEach>	
 					
-					<!-- 강사님 코드 -->		
+					<!-- 강사님 코드 		
 					<tr>
 						<td>3</td>
 						<td style="text-align:left; padding-left:0px"><a href="">세 번째 글입니다.</a></td>
@@ -53,7 +55,7 @@
 					</tr>
 					<tr>
 						<td>2</td>
-						<!--style="padding-left:${(vo.depth-1)*20 }px"  -->
+						<!--style="padding-left:${(vo.depth-1)*20 }px"  
 						<td style="text-align:left; padding-left:20px">
 							<img src="${pageContext.servletContext.contextPath }/assets/images/reply.png" />
 							<a href="">두 번째 글입니다.</a>
@@ -73,8 +75,9 @@
 						<td>3</td>
 						<td>2015-09-25 07:24:32</td>
 						<td><a href=""  class="del" style='background-image: url("${pageContext.servletContext.contextPath }/assets/images/recycle.png")'>삭제</a></td>
-					</tr>
+					</tr>-->
 				</table>
+				
 				
 				<!-- pager 추가 -->
 				<div class="pager">

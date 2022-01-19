@@ -17,6 +17,15 @@ public class ListAction implements Action {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		String kwd = request.getParameter("kwd");
+		List<BoardVo> boardList=null;
+		if(kwd==null || kwd.equals("")) {
+			boardList = new BoardDao().findAll();
+		}else {
+			boardList = new BoardDao().findKwd(kwd);
+		}
+		request.setAttribute("boardList", boardList);
+		MvcUtil.forward("board/list", request, response);
 //		int pageCount = 10;
 //		int currentPage = 2;
 //		int nextPage = -1;//nextpage가 없다. 
@@ -37,9 +46,8 @@ public class ListAction implements Action {
 //		private Long userNo;
 //		private String userName;
 		
-		List<BoardVo> boardList = new BoardDao().findAll();
-		request.setAttribute("boardList", boardList);
-		MvcUtil.forward("board/list", request, response);
+		
+		
 	}
 
 }

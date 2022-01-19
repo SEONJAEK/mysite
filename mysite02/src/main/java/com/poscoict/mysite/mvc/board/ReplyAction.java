@@ -13,37 +13,34 @@ import com.poscoict.mysite.vo.UserVo;
 import com.poscoict.web.mvc.Action;
 import com.poscoict.web.util.MvcUtil;
 
-public class WriteAction implements Action {
+public class ReplyAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession(true);
-		UserVo userVo = (UserVo)session.getAttribute("authUser");
+		//글 고유번호(이전)
+		Long pre_no = Long.parseLong(request.getParameter("preNo"));
+		BoardVo pre_boardVo = new BoardDao().findOne(pre_no);
 		
+		//현재 넘어온 데이터
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
-		BoardVo boardVo  = new BoardVo();
+		
+		//boardVo
+		BoardVo boardVo = new BoardVo();
 		boardVo.setTitle(title);
 		boardVo.setContents(content);
-		boardVo.setUserNo(userVo.getNo());
+		boardVo.setGroupNo(pre_boardVo.getGroupNo());
+		boardVo.setOrderNo(pre_boardVo.getOrderNo());
+		boardVo.setDepth(pre_boardVo.getDepth());
 		
-		new BoardDao().insert(boardVo);
+		HttpSession session = request.getSession(true);//이건 무조건 써줘야하는건가?
+		UserVo userVo = (UserVo)session.getAttribute("authUser");
 		
-		//잠시 보류하겠음... ㅎㅎㅎ
-//		//그 사람의 no값 가져오셈
-//		
-//		String password = request.getParameter("password");
-//		
-//		GuestbookVo vo = new GuestbookVo();
-//		vo.setName(name);
-//		vo.setPassword(password);
-//		vo.setMessage(content);
-//		
-//		GuestbookDao dao = new GuestbookDao();
-//		dao.insert(vo);
-//		
-//		//왜 이거 안돼?
-//		//MvcUtil.redirect("main/index",request, response); 
+		//답글 1차 작업: 답글 순서 reorder
+		new BoardDao().replyUpdate(pre_boardVo);
+		//답글 2차 작업: reply insert해주기
+		new BoardDao().replyInsert(boardVo, userVo.getNo());
+		
 		MvcUtil.redirect("/board",request, response); 
 	}
 
