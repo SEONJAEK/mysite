@@ -77,18 +77,34 @@
 						<td><a href=""  class="del" style='background-image: url("${pageContext.servletContext.contextPath }/assets/images/recycle.png")'>삭제</a></td>
 					</tr>-->
 				</table>
-				
-				
-				<!-- pager 추가 -->
 				<div class="pager">
 					<ul>
-						<li><a href="">◀</a></li>
-						<li><a href="">1</a></li>
-						<li class="selected">2</li>
-						<li><a href="">3</a></li>
-						<li>4</li>
-						<li>5</li>
-						<li><a href="">▶</a></li>
+						<c:choose>
+							<c:when test='${page.currentpage==1 }'>
+								<c:forEach var="pagenum" begin="1" end="${page.listcnt}">
+									<li><a href="${pageContext.servletContext.contextPath}/board?page=${pagenum}&kwd=${param.kwd}">${pagenum}</a></li>														
+								</c:forEach>
+								<li><a href="${pageContext.servletContext.contextPath}/board?page=${page.currentpage+page.nextpage}&kwd=${param.kwd}">▶</a></li>
+								
+							</c:when>
+							
+							<c:when test='${page.currentpage==page.listcnt}'>
+							<li><a href="${pageContext.servletContext.contextPath}/board?page=${page.currentpage+page.prepage}&kwd=${param.kwd}">◀</a></li>
+							
+								<c:forEach var="pagenum" begin="1" end="${page.listcnt}">
+									<li><a href="${pageContext.servletContext.contextPath}/board?page=${pagenum}&kwd=${param.kwd}">${pagenum}</a></li>														
+								</c:forEach>
+							</c:when>
+							
+							<c:otherwise>
+								<li><a href="${pageContext.servletContext.contextPath}/board?page=${page.currentpage+page.prepage}&kwd=${param.kwd}">◀</a></li>
+								<c:forEach var="pagenum" begin="1" end="${page.listcnt}">
+									<li><a href="${pageContext.servletContext.contextPath}/board?page=${pagenum}&kwd=${param.kwd}">${pagenum}</a></li>					
+								</c:forEach>
+								<li><a href="${pageContext.servletContext.contextPath}/board?page=${page.currentpage+page.nextpage}&kwd=${param.kwd}">▶</a></li>
+								
+							</c:otherwise>
+						</c:choose>
 					</ul>
 				</div>					
 				<!-- pager 추가 -->
