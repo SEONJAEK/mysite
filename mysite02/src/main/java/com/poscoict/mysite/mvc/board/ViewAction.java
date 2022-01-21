@@ -19,13 +19,14 @@ public class ViewAction implements Action {
 		String nostring = request.getParameter("no");
 		Long no = Long.parseLong(request.getParameter("no"));
 		BoardVo boardVo= new BoardDao().findOne(no);
+		request.setAttribute("board", boardVo);
 		
 		//쿠키 읽기
 		Cookie[] cookies = request.getCookies();
 		Cookie viewCookie = null;
 		if(cookies != null && cookies.length > 0) {
 			for(Cookie cookie : cookies) {
-				if(no.equals(cookie.getName())) {
+				if(nostring.equals(cookie.getName())) {
 					viewCookie = cookie;
 					break;
 				}
@@ -42,8 +43,6 @@ public class ViewAction implements Action {
 			new BoardDao().views(boardVo);
 		}
 		
-		
-		request.setAttribute("board", boardVo);
 		MvcUtil.forward("board/view", request, response);
 
 	}

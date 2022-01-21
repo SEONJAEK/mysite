@@ -26,10 +26,7 @@ public class JoinAction implements Action {
 		vo.setPassword(password);
 		vo.setGender(gender);
 		
-		
-		
-		//new UserDao().insert(vo);
-		
-		MvcUtil.redirect(request.getContextPath() +"/user?a=joinsuccess", request, response);
+		new UserDao().insert(vo);
+		MvcUtil.redirect("/user?a=joinsuccess", request, response);
 	}
 }
