@@ -29,7 +29,7 @@ public class BoardDao {
 		}else {
 			String sql = "select b.no, b.title, b.contents, b.hit, b.g_no, b.o_no, b.depth, b.reg_date, b.user_no, u.name "
 					+ "from user u join board b on b.user_no = u.no where b.title like '%"+ kwd + "%' or b.contents like '%"+kwd+ "%' "
-							+ "limit "+ page +" , 10";
+							+ " order by g_no desc, o_no asc limit "+ page +" , 10";
 
 			pstmt = conn.prepareStatement(sql);
 		}
