@@ -40,6 +40,7 @@ public class UserVo {
 	public String getJoinDate() {
 		return joinDate;
 	}
+
 	public void setJoinDate(String joinDate) {
 		this.joinDate = joinDate;
 	}

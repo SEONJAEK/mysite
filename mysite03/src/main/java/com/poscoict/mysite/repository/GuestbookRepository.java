@@ -68,8 +68,16 @@ public class GuestbookRepository {
 		return list;
 	}
 	
-	public boolean delete(GuestbookVo vo) {
-		boolean result = false;
+	public int delete(Long no, String password) {
+		GuestbookVo vo = new GuestbookVo();
+		vo.setNo(no);
+		vo.setPassword(password);
+		
+		return delete(vo);
+	}	
+
+	public int delete(GuestbookVo vo) {
+		int result = 0;
 
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -86,9 +94,7 @@ public class GuestbookRepository {
 			pstmt.setLong(1, vo.getNo());
 			pstmt.setString(2, vo.getPassword());
 			
-			int count = pstmt.executeUpdate();
-			result = count == 1;
-			
+			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			System.out.println("error:" + e);
 		} finally {
@@ -107,8 +113,8 @@ public class GuestbookRepository {
 		return result;		
 	}
 	
-	public boolean insert(GuestbookVo vo) {
-		boolean result = false;
+	public int insert(GuestbookVo vo) {
+		int result = 0;
 
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -117,7 +123,7 @@ public class GuestbookRepository {
 			
 			String sql =
 					" insert" +
-					" into guestbook" +
+					"   into guestbook" +
 					" values (null, ?, ?, ?, now())";
 			pstmt = conn.prepareStatement(sql);
 			
@@ -125,9 +131,7 @@ public class GuestbookRepository {
 			pstmt.setString(2, vo.getPassword());
 			pstmt.setString(3, vo.getMessage());
 			
-			int count = pstmt.executeUpdate();
-			result = count == 1;
-			
+			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			System.out.println("error:" + e);
 		} finally {
@@ -157,5 +161,5 @@ public class GuestbookRepository {
 		} 
 		
 		return conn;
-	}	
+	}
 }
