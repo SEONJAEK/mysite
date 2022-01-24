@@ -1,0 +1,94 @@
+-- MySQL Workbench Forward Engineering
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+
+-- -----------------------------------------------------
+-- Schema mydb
+-- -----------------------------------------------------
+-- -----------------------------------------------------
+-- Schema webdb
+-- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- Schema webdb
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `webdb` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci ;
+USE `webdb` ;
+
+-- -----------------------------------------------------
+-- Table `webdb`.`user`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `webdb`.`user` (
+  `no` INT(11) NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NOT NULL,
+  `email` VARCHAR(200) NOT NULL,
+  `password` VARCHAR(45) NOT NULL,
+  `gender` ENUM('female', 'male') NOT NULL,
+  `join_date` DATE NOT NULL,
+  PRIMARY KEY (`no`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 17
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `webdb`.`board`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `webdb`.`board` (
+  `no` INT(11) NOT NULL AUTO_INCREMENT,
+  `title` VARCHAR(200) NOT NULL,
+  `contents` TEXT NOT NULL,
+  `hit` INT(11) NOT NULL,
+  `g_no` INT(11) NOT NULL,
+  `o_no` INT(11) NOT NULL,
+  `depth` INT(11) NOT NULL,
+  `reg_date` DATETIME NOT NULL,
+  `user_no` INT(11) NOT NULL,
+  PRIMARY KEY (`no`),
+  INDEX `fk_board_user_idx` (`user_no` ASC) VISIBLE,
+  CONSTRAINT `fk_board_user`
+    FOREIGN KEY (`user_no`)
+    REFERENCES `webdb`.`user` (`no`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 57
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `webdb`.`emaillist`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `webdb`.`emaillist` (
+  `no` INT(11) NOT NULL AUTO_INCREMENT,
+  `first_name` VARCHAR(45) NOT NULL,
+  `last_name` VARCHAR(45) NOT NULL,
+  `email` VARCHAR(200) NOT NULL,
+  PRIMARY KEY (`no`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 3
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `webdb`.`guestbook`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `webdb`.`guestbook` (
+  `no` INT(11) NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NOT NULL,
+  `password` VARCHAR(45) NOT NULL,
+  `message` VARCHAR(45) NOT NULL,
+  `reg_date` DATETIME NOT NULL,
+  PRIMARY KEY (`no`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 27
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
