@@ -274,7 +274,7 @@ public class BoardDao {
 		return boardList;
 	}
 
-	// findOne
+	 //findOne//원래 선재 코드
 	public BoardVo findOne(Long no) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -335,6 +335,8 @@ public class BoardDao {
 
 		return bvo;
 	}
+	
+	
 
 	// update
 	public boolean update(BoardVo vo) {
