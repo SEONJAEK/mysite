@@ -21,7 +21,7 @@ public class BoardRepository {
 	public List<BoardVo> findAllByPageAndKeword(String keyword, Integer page, Integer size) {
 		Map<String, Object> map = new HashMap<>();
 		map.put("keyword", keyword);
-		map.put("page", page);
+		map.put("page", (page-1)*size);
 		map.put("size", size);
 		return sqlSession.selectList("board.findAllByPageAndKeword",map);
 	}

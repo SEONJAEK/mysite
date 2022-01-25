@@ -13,7 +13,7 @@
 		<!-- ${keyword만 쏙들어감}:치환
 				#{}:값의 바인딩-->
 			<![CDATA[
-				select count(*) from board where title like '%${_parameter(암거나써도됨)}%' or contents like '%${_parameter(암거나써도됨)}%'
+				select count(*) from board where title like '%${_parameter}%' or contents like '%${_parameter}%'
 			]]>
 		</otherwise>
 	</choose>
@@ -47,7 +47,7 @@
 				<![CDATA[
 					select a.no, a.title, a.hit, date_format(a.reg_date, '%Y-%m-%d %p %h:%i:%s') as regDate, 
 					a.depth, b.name as userName, a.user_no as userNo from board a, 
-					user b where a.user_no = b.no and (title like #{keyword} or contents like #{keyword}) order by g_no desc, o_no asc limit #{page}, #{size}
+					user b where a.user_no = b.no and (title like  '%${keyword}%' or contents like '%${keyword}%') order by g_no desc, o_no asc limit #{page}, #{size}
 				]]>
 			</otherwise>
 		</choose>
