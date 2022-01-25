@@ -19,4 +19,12 @@
 		 select no, name, date_format(reg_date, '%Y/%m/%d %H:%i:%s') as regDate, message from guestbook order by reg_date desc
 		]]>
 		</select>
+		
+		<delete id="delete" parameterType ="guestbookvo">
+			<![CDATA[
+				delete from guestbook where no = #{no} and password= #{password}
+			]]>
+		</delete>
+		
+		
 </mapper>
