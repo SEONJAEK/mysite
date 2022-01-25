@@ -37,7 +37,14 @@ public class ListAction implements Action {
 		map.put("currentpage", page);
 		map.put("nextpage", 1);
 		map.put("prepage", -1);
-		map.put("cnt", new BoardDao().getCount());
+		
+		if (kwd != null) {
+			map.put("cnt", new BoardDao().getCount(kwd));
+			
+		} else {
+			map.put("cnt", new BoardDao().getCount());
+			
+		}
 		map.put("listcnt", (int) Math.ceil((double)map.get("cnt")/map.get("pagecount")));
 		map.put("boardcnt", map.get("cnt")-(map.get("currentpage")-1)*map.get("pagecount"));
 		

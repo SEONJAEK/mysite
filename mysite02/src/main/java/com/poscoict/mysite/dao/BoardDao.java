@@ -529,6 +529,42 @@ public class BoardDao {
 			return result;
 		}
 		
+		
+		//count// keyword와 
+		public int getCount(String kwd) {
+			int result = 0;
+			ResultSet rs = null;
+
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			try {
+				conn = getConnection();
+				
+				String sql = "select count(*) from board where title like '%"+ kwd + "%' or contents like '%"+kwd+ "%'";
+				pstmt = conn.prepareStatement(sql);
+				rs = pstmt.executeQuery();	
+				while(rs.next()) {
+					result = rs.getInt(1);
+				}
+				
+			} catch (SQLException e) {
+				System.out.println("error:" + e);
+			} finally {
+				try {
+					if(pstmt != null) {
+						pstmt.close();
+					}
+					if(conn != null) {
+						conn.close();
+					}
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}		
+			
+			return result;
+		}
+
 		//조회수 증가
 		public boolean views(BoardVo vo) {
 			boolean result = false;
