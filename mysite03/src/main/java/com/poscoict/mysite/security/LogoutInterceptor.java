@@ -12,7 +12,7 @@ public class LogoutInterceptor extends HandlerInterceptorAdapter {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		HttpSession session = request.getSession();
-		if(session == null) {
+		if(session != null) {
 			session.removeAttribute("authUser");
 			session.invalidate();
 		}

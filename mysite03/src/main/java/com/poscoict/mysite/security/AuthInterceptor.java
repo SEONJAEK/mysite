@@ -27,10 +27,20 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 		//그핸들러메소드에 @Auth붙여있냐? 물어보는 거임 -> getMethodAnnotation
 		Auth auth = handlerMethod.getMethodAnnotation(Auth.class);
 		
-		//4. @Auth가 없다면...//그냥 핸들러 실행시키면 끝이고.. 라고 하심.뭔말임???
+		//4.Handler Method에  @Auth가 없다면 Type에 있는 지 확인(과제)...//그냥 핸들러 실행시키면 끝이고.. 라고 하심.뭔말임???
+		if(auth == null) {
+			
+		}
+		
+		
+		//5. type과 method에 @Auth가 적용이 안되어있는 경우
 		if(auth == null) {
 			return true;
 		}
+		
+		
+		
+		
 		//5. @Auth가 적용이 되어 있기 때문에 인증(Authentication)여부 확인
 		
 		HttpSession session = request.getSession();
