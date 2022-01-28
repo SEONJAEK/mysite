@@ -12,12 +12,11 @@
 
 	<properties>
 		<org.springframework-version>4.3.4.RELEASE</org.springframework-version>
-		<jcloverslf4j.version>1.7.6</jcloverslf4j.version>		
-    	<logback.version>1.1.1</logback.version>
+    	<jcloverslf4j.version>1.7.6</jcloverslf4j.version>		
+    	<logback.version>1.1.1</logback.version>		
 	</properties>
 
 	<dependencies>
-
 		<!-- Spring Context(Container) -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -29,7 +28,7 @@
 				  <groupId>commons-logging</groupId>
 				  <artifactId>commons-logging</artifactId>
 			   </exclusion>
-			</exclusions>
+			</exclusions>			
 		</dependency>
 
 		<!-- Spring MVC -->
@@ -38,22 +37,27 @@
 			<artifactId>spring-webmvc</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
-
+		
 		<!-- Spring Web -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-web</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
-		
-		<!-- spring aspect -->
+
+		<!-- Spring Aspect -->
+		<dependency>
+		    	<groupId>org.springframework</groupId>
+		    	<artifactId>spring-aspects</artifactId>
+		    	<version>${org.springframework-version}</version>
+		</dependency>
+				
+		<!-- Spring JDBC -->
 		<dependency>
 			<groupId>org.springframework</groupId>
-			<artifactId>spring-aspects</artifactId>
+			<artifactId>spring-jdbc</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
-		
-		
 
 		<!-- MyBatis -->
 		<dependency>
@@ -66,21 +70,21 @@
 			<artifactId>mybatis-spring</artifactId>
 			<version>1.2.0</version>
 		</dependency>
-
+		
 		<!-- Common DBCP -->
 		<dependency>
 			<groupId>commons-dbcp</groupId>
 			<artifactId>commons-dbcp</artifactId>
 			<version>1.4</version>
 		</dependency>
-
+		
 		<!-- MariaDB JDBC Driver -->
 		<dependency>
-			<groupId>org.mariadb.jdbc</groupId>
-			<artifactId>mariadb-java-client</artifactId>
-			<version>2.7.4</version>
+		    <groupId>org.mariadb.jdbc</groupId>
+		    <artifactId>mariadb-java-client</artifactId>
+		    <version>2.7.4</version>
 		</dependency>
-		
+
 		<!-- Logback --> 
 		<dependency>                                    
 			<groupId>org.slf4j</groupId>                
@@ -92,7 +96,7 @@
 			<artifactId>logback-classic</artifactId>
 			<version>${logback.version}</version>
 		</dependency>
-
+			
 	</dependencies>
 
 	<build>
@@ -111,5 +115,4 @@
 			</plugin>	
 		</plugins>		
 	</build>	
-
 </project>
