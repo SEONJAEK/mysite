@@ -10,7 +10,8 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import com.poscoict.mysite.vo.UserVo;
 
 public class AuthInterceptor extends HandlerInterceptorAdapter {
-
+	
+	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
@@ -29,18 +30,18 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 		
 		//4.Handler Method에  @Auth가 없다면 Type에 있는 지 확인(과제)...//그냥 핸들러 실행시키면 끝이고.. 라고 하심.뭔말임???
 		if(auth == null) {
-			
+			auth = handlerMethod.getBeanType().getAnnotation(Auth.class);
 		}
 		
+//		if (auth == null) {
+//			return true;
+//		}
 		
 		//5. type과 method에 @Auth가 적용이 안되어있는 경우
 		if(auth == null) {
 			return true;
 		}
-		
-		
-		
-		
+				
 		//5. @Auth가 적용이 되어 있기 때문에 인증(Authentication)여부 확인
 		
 		HttpSession session = request.getSession();
@@ -51,10 +52,23 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 		UserVo authUser = (UserVo)session.getAttribute("authUser");
 		if(authUser == null) {
 			response.sendRedirect(request.getContextPath()+ "/user/login");
+			return false;
 		}
 		//여기까지 왔다는 것은 authUser도 있고 annotaion도 있다는 뜻
 		//여기까지 왔다는 것은 인증이 확인됐다는 뜻이니까 다음 controller로 가게 해라->true
 		//6. 인증확인 !!! -> controller의 handler(method)실행
+		
+		
+		// 6. admin 인증
+		if("ADMIN".equals(authUser.getRole())) {
+			return true;
+		}
+		System.out.println("real role:" + auth.role());
+		if(!auth.role().equals(authUser.getRole())) {
+			response.sendRedirect(request.getContextPath());
+			return false;
+		}
+		
 		return true;
 	}
 }

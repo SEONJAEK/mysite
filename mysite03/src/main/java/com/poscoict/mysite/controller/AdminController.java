@@ -1,6 +1,7 @@
 package com.poscoict.mysite.controller;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,32 +11,44 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.poscoict.mysite.security.Auth;
+import com.poscoict.mysite.service.FileUploadService;
 import com.poscoict.mysite.service.SiteService;
 import com.poscoict.mysite.vo.SiteVo;
 
 //이 컨트롤러에 있는 모든 핸들러(메소드)는 다 인증을 받아라라는 뜻
-//@Auth(role="ADMIN")
+@Auth(role="ADMIN")
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
 	@Autowired
 	private SiteService siteService;
 	
-//	@Autowired
-//	private ServletContext servletContext;
+	@Autowired
+	private FileUploadService fileUploadService;
+	
+	@Autowired
+	private ServletContext servletContext;
 
-	@RequestMapping(value = "")
+	@RequestMapping(value = {"","/main"})
 	public String main(Model model) {
-		model.addAttribute("sitevo", siteService.selectAll());
+		model.addAttribute("siteVo", siteService.selectAll());
 		return "admin/main";
 	}
 
-//	@RequestMapping(value = "/update", method = RequestMethod.POST)
-//	public String update(@RequestParam(value = "upload-file") MultipartFile multipartFile, SiteVo siteVo) {
-//		System.out.println("========================" + siteVo);
-//		siteService.update(siteVo);
-//		return "redirect:/main/index";
-//	}
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	public String update(@RequestParam(value = "file1") MultipartFile multipartFile, SiteVo siteVo) {
+		
+		String url = fileUploadService.restore(multipartFile);
+		if(url==null) {
+			SiteVo realVo = siteService.selectAll();
+			url = realVo.getProfile();
+		}
+		siteVo.setProfile(url);
+		siteService.update(siteVo);
+		servletContext.setAttribute("site",siteVo);
+		return "admin/main";
+	}
 
 	@RequestMapping("/board")
 	public String board() {

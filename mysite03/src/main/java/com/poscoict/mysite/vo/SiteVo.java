@@ -4,7 +4,7 @@ public class SiteVo {
 
 	private Long no;
 	private String title;
-	private String welcome;
+	private String welcomeMessage;
 	private String profile;
 	private String description;
 	public Long getNo() {
@@ -19,11 +19,12 @@ public class SiteVo {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public String getWelcome() {
-		return welcome;
+	
+	public String getWelcomeMessage() {
+		return welcomeMessage;
 	}
-	public void setWelcome(String welcome) {
-		this.welcome = welcome;
+	public void setWelcomeMessage(String welcomeMessage) {
+		this.welcomeMessage = welcomeMessage;
 	}
 	public String getProfile() {
 		return profile;
@@ -39,9 +40,10 @@ public class SiteVo {
 	}
 	@Override
 	public String toString() {
-		return "siteVo [no=" + no + ", title=" + title + ", welcome=" + welcome + ", profile=" + profile
+		return "SiteVo [no=" + no + ", title=" + title + ", welcomeMessage=" + welcomeMessage + ", profile=" + profile
 				+ ", description=" + description + "]";
 	}
+	
 	
 	
 }
