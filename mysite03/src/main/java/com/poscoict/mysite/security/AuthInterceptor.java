@@ -17,6 +17,8 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 			throws Exception {
 		//1. handler 종류 확인(HandlerMethod-controller의 핸들러 정보확인, defaultServletHandler 이렇게 두종류있음)
 		//true -> default handler method로 간다 
+		//default 메소드인지 거른다
+		//false이면 default메소드이니 다 실행해라
 		if(handler instanceof HandlerMethod == false) {
 			return true;
 		}
