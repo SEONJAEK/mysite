@@ -1,27 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="site">
-	<update id="update" parameterType="sitevo">
-		<choose>
-			<when test="profile == null or ''== profile">
-			      <![CDATA[
-			             update site set title = #{title}, welcome = #{welcomeMessage}, description = #{description} where no = 2
-			       ]]>
-			</when>
-			<otherwise>
-			      <![CDATA[
-			             update site set title = #{title}, welcome = #{welcomeMessage}, profile = #{profile}, description = #{description} where no = 2
-			       ]]>
-			</otherwise>
-		</choose>
-	</update>
-
-	<select id="selectAll" resultType="sitevo">
+	<select id="find" resultType="sitevo">
       <![CDATA[
-           select no, title, welcome as welcomeMessage, profile, description
-              from site 
-          where no = 2
+           select no, title, welcome, profile, description
+           from site 
+          	where no = 2
        ]]>
 	</select>
 
+
+	<update id="update" parameterType="sitevo">
+      <![CDATA[
+             update site set title = #{title}, welcome = #{welcome}, profile = #{profile}, description = #{description} where no = 2
+       ]]>
+	</update>
+	
+	
 </mapper>

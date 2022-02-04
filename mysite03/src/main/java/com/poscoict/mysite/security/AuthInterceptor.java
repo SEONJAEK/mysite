@@ -28,13 +28,12 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 		//그핸들러메소드에 @Auth붙여있냐? 물어보는 거임 -> getMethodAnnotation
 		Auth auth = handlerMethod.getMethodAnnotation(Auth.class);
 		
-		//4.
-		//4.Handler Method에  @Auth가 없다면 Type에 있는 지 확인(과제)...//그냥 핸들러 실행시키면 끝이고.. 라고 하심.뭔말임???
+		//4.Handler Method에  @Auth가 없다면 Type(클래스)에 있는 지 확인(과제)...//그냥 핸들러 실행시키면 끝이고.. 라고 하심.뭔말임???
 		if(auth == null) {
 			auth = handlerMethod
 					.getMethod()
-					.getDeclaringClass()
-					.getAnnotation(Auth.class);
+					.getDeclaringClass() //클래스 범위 불러오는것 
+					.getAnnotation(Auth.class); //클래스에 어노테이션이 붙어있는지 안 붙어있는 지 확인
 		}
 		
 		//5. type과 method에 @Auth가 적용이 안되어있는 경우

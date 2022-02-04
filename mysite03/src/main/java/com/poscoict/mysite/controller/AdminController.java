@@ -17,10 +17,11 @@ import com.poscoict.mysite.service.SiteService;
 import com.poscoict.mysite.vo.SiteVo;
 
 //이 컨트롤러에 있는 모든 핸들러(메소드)는 다 인증을 받아라라는 뜻
-//@Auth(role="ADMIN")
+@Auth(role="ADMIN")
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
+	
 	@Autowired
 	private SiteService siteService;
 	
@@ -29,26 +30,27 @@ public class AdminController {
 	
 	@Autowired
 	private ServletContext servletContext;
-
-	@RequestMapping(value = {"","/main"})
+	
+	@RequestMapping("")
 	public String main(Model model) {
-		model.addAttribute("siteVo", siteService.selectAll());
+		SiteVo siteVo = siteService.getSite();
+		model.addAttribute("site", siteVo);
 		return "admin/main";
 	}
-
-	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public String update(@RequestParam(value = "file1") MultipartFile multipartFile, SiteVo siteVo) {
+	
+	
+	@RequestMapping("/main/update")
+	public String main(SiteVo site, @RequestParam("file") MultipartFile file) {
+		String profile = fileUploadService.restore(file);
 		
-		String url = fileUploadService.restore(multipartFile);
-		if(url==null) {
-			SiteVo realVo = siteService.selectAll();
-			url = realVo.getProfile();
+		if(profile != null) {
+			site.setProfile(profile);
 		}
-		siteVo.setProfile(url);
-		siteService.update(siteVo);
-		servletContext.setAttribute("siteVo",siteVo);
-		return "admin/main";
+		siteService.update(site);
+		servletContext.setAttribute("site", site);
+		return "redirect:/admin";
 	}
+	
 
 	@RequestMapping("/board")
 	public String board() {

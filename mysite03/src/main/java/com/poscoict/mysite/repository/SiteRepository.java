@@ -15,17 +15,15 @@ import com.poscoict.mysite.vo.UserVo;
 @Repository
 public class SiteRepository {
 	
-	
 	@Autowired
 	private SqlSession sqlSession;
 	
-	
-	public SiteVo selectAll() {
-		return sqlSession.selectOne("site.selectAll");
+	public SiteVo find() {
+		return sqlSession.selectOne("site.find");
 	}
 	
-	public int update(SiteVo siteVo) {
-		return sqlSession.update("site.update",siteVo); 
+	public int update(SiteVo site) {
+		return sqlSession.update("site.update", site); 
 	}
 
 	
