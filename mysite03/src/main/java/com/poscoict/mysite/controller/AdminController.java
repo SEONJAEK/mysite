@@ -17,7 +17,7 @@ import com.poscoict.mysite.service.SiteService;
 import com.poscoict.mysite.vo.SiteVo;
 
 //이 컨트롤러에 있는 모든 핸들러(메소드)는 다 인증을 받아라라는 뜻
-@Auth(role="ADMIN")
+//@Auth(role="ADMIN")
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
