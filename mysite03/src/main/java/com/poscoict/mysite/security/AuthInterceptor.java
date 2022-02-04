@@ -33,7 +33,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 		//4.Handler Method에  @Auth가 없다면 Type(클래스)에 있는 지 확인(과제)...//그냥 핸들러 실행시키면 끝이고.. 라고 하심.뭔말임???
 		if(auth == null) {
 			auth = handlerMethod
-					.getMethod()
+					.getMethod()//각 메소드 접근
 					.getDeclaringClass() //클래스 범위 불러오는것 
 					.getAnnotation(Auth.class); //클래스에 어노테이션이 붙어있는지 안 붙어있는 지 확인
 		}
