@@ -46,7 +46,7 @@ public class AdminController {
 		}
 		siteVo.setProfile(url);
 		siteService.update(siteVo);
-		servletContext.setAttribute("site",siteVo);
+		servletContext.setAttribute("siteVo",siteVo);
 		return "admin/main";
 	}
 

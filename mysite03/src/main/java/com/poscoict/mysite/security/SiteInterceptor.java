@@ -1,5 +1,6 @@
 package com.poscoict.mysite.security;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -18,11 +19,14 @@ public class SiteInterceptor extends HandlerInterceptorAdapter{
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		SiteVo siteVo = (SiteVo)request.getServletContext().getAttribute("site");
+		ServletContext servletContext = request.getServletContext();
+		SiteVo siteVo = (SiteVo)request.getServletContext().getAttribute("siteVo");
+
 		
-		if (siteVo == null) {
-			
-		}
+		  if (siteVo == null) {
+		         servletContext.setAttribute("siteVo", siteService.selectAll());
+		      }
+
 		return true;
 	}
 
