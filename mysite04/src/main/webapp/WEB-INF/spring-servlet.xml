@@ -11,28 +11,21 @@
 	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
 	<!-- auto proxy -->
-	<aop:aspectj-autoproxy />
 
 	<!-- Message Converter, Handler Mapping, Validator 생성 및 설정 -->
 	<mvc:annotation-driven>
 		<mvc:argument-resolvers>
-			<bean
-				class="com.poscoict.mysite.security.AuthUserHandlerMethodArgumentResolver" />
+			<bean class="com.poscoict.mysite.security.AuthUserHandlerMethodArgumentResolver" />
 		</mvc:argument-resolvers>
 	</mvc:annotation-driven>
 
-	<!-- 서블릿 컨테이너(tomcat)의 DefaultServlet 위임(delegate) Handler -->
-	<mvc:default-servlet-handler />
+	<!-- 서블릿 컨테이너(tomcat)의 DefaultServlet 위임(delegate) Handler : MvcConfig에 있음 -->
 	
 	<!-- mvc url-resource mapping -->
 	<mvc:resources mapping="/images/**" location="file:/upload-images/" />
 
 	<!--Interceptors -->
 	<mvc:interceptors>
-		<mvc:interceptor>
-			<mvc:mapping path="/**" />
-			<bean class="com.poscoict.mysite.interceptor.SiteInterceptor" />
-		</mvc:interceptor>
 		<mvc:interceptor>
 			<mvc:mapping path="/user/auth" />
 			<bean class="com.poscoict.mysite.security.LoginInterceptor" />
@@ -51,13 +44,7 @@
 	</mvc:interceptors>
 	
 	<!-- ViewResolver -->
-	<bean id="viewResolver"
-		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="viewClass"
-			value="org.springframework.web.servlet.view.JstlView" />
-		<property name="prefix" value="/WEB-INF/views/" />
-		<property name="suffix" value=".jsp" />
-	</bean>
+	
 	
 	<!-- Message Source -->
 	<bean id="messageSource"
