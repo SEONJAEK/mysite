@@ -32,7 +32,7 @@
 	<!-- 버전적을필요없다 -> 스프링부트에 다 있음 -->
 	<dependencies>
 	
-		<!-- spring boot dvtools: live reload -->
+		<!-- spring boot devtools: live reload -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>

@@ -11,7 +11,7 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 @Configuration
-@PropertySource("classpath:com/poscoict/mysite/config/WebConfig.properties")
+@PropertySource("classpath:com/poscoict/mysite/config/web/fileupload.properties")
 public class FileuploadConfig extends WebMvcConfigurerAdapter{
 	
 	@Autowired
