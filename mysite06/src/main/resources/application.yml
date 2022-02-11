@@ -15,7 +15,24 @@ spring:
          prefix: /WEB-INF/views/
          suffix: .jsp
 
+   # message resource(Internationalization)
+   messages:
+      always-message-format: true
+      basename: messages/messages_ko
+      encoding: UTF-8
+
+   # multipart
+   multipart:
+       enabled: true
+       max-file-size: 50MB
+       max-request-size: 50MB
+
+   # aop(@EnableAspectJAutoProxy)
+   aop:
+      auto: true
+      proxy-target-class: true
 ---
+
 #dev profile: spring boot configuration
 spring:
    config:
@@ -62,9 +79,9 @@ server:
       encoding:
          charset: utf-8
          enabled: true
-         forced: false
-         forced-request: false
-         forced-response: false
+         force: false
+         force-request: false
+         force-response: false
    
 ---
 # mybatis
@@ -73,3 +90,5 @@ mybatis:
 ---
 # logging
 #개발할때의 dB와 Release할때의 DB다를 수 있음 
+logging: 
+   config: classpath:logback.xml
