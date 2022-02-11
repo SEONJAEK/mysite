@@ -16,7 +16,7 @@
                  |	         |		|	|		|		|--- FileuploadConfig.java
                  |	         |		|	|--- mysite
                  |	         |		|	|		|--- config
-                 |	         |		|	|		|		|--- AppConfig.java
+                 |	         |		|	|		|		|--- AppConfig.java //최고의 설정이 모이는 곳, 총괄 설정하는 곳!!
                  |	         |		|	|		|		|--- WebConfig.java
                  |	         |		|	|		|--- controller
                  |	         |		|	|		|--- service

@@ -49,7 +49,7 @@
 				<version>3.2.1</version>
 				<configuration>
 					<warSourceDirectory>${project.basedir}/src/main/webapp</warSourceDirectory>
-					<failOnMissingWebXml>true</failOnMissingWebXml>
+					<failOnMissingWebXml>false</failOnMissingWebXml>
 				</configuration>
 			</plugin>
 		</plugins>
@@ -59,7 +59,8 @@
 		<module>mysite02</module>
 		<module>mysite03</module>
 		<module>mysite04</module>
+		<module>mysite05</module>
+		<module>mysite06</module>
 	</modules>
-	
 	
 </project>
