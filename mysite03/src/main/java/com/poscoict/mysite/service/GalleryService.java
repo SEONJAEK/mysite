@@ -17,7 +17,7 @@ public class GalleryService {
 		return galleryRepository.findAll();
 	}
 	
-	public Boolean removeImge(Long no) {
+	public Boolean removeImage(Long no) {
 		return galleryRepository.delete(no) == 1;
 	}
 	

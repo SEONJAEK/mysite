@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.poscoict.mysite.security.Auth;
 import com.poscoict.mysite.service.FileUploadService;
 import com.poscoict.mysite.service.GalleryService;
 import com.poscoict.mysite.vo.GalleryVo;
@@ -31,10 +32,10 @@ public class GalleryController {
 		return "gallery/index";
 	}
 	
-	// @Auth(role="ADMIN")
+	@Auth(role="ADMIN")
 	@RequestMapping("/delete/{no}")
 	public String delete(@PathVariable("no") Long no) {
-		 // galleryService.removeImge(no);
+		galleryService.removeImage(no);
 		System.out.println("delete:" + no);
 		return "redirect:/gallery";
 	}
@@ -43,8 +44,15 @@ public class GalleryController {
 	public String upload(
 			@RequestParam("file") MultipartFile multipartFile,
 			@RequestParam(value="comments", required=true, defaultValue="") String comments) {
-		// galleryService.saveImage(vo);
-		System.out.println("comments:" + comments);
+	
+		
+		GalleryVo galleryVo = new GalleryVo();
+		String url = fileUploadService.restore(multipartFile);
+		
+		galleryVo.setComments(comments);
+		galleryVo.setUrl(url);		
+		galleryService.saveImage(galleryVo);
+	
 		return "redirect:/gallery";
 	}
 }

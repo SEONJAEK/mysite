@@ -9,7 +9,7 @@
 		]]>
 		</select>
 		
-		<delete id="delete" parameterType ="galleryvo">
+		<delete id="delete" parameterType ="Long">
 			<![CDATA[
 				delete from gallery where no = #{no}
 			]]>

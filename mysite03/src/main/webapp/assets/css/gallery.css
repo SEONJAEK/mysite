@@ -2,15 +2,34 @@
 @import "mysite.css";
 
 #gallery ul li a.image{
-	display: block;
-	width: 114px;
-	height: 114px;
+	display:block;
+	outline: 2px solid #999;	
+	border: 2px solid #bbb;
+	width:114px;
+	height:114px;
+	font-size:0px;
 	background-size: 114px;
 	background-repeat: no-repeat;
-	background-position: center center;}
+	background-position: 50%;
+	background-color:#ccc;
+	margin: 2px;}
+	
+#gallery ul li{
+	
+	position:relative;
+	float:left; 
+	overflow-y:hidden;
+	padding-bottom: 10px;
+	padding-right: 10px;
+}
 
 #gallery			{ margin:20px auto;	width:540px; }
-#gallery ul			{ width: 100%; }
+#gallery ul			{
+	clear:both; 
+	position: relative; 
+	left: 2.5%;
+	width: 100%; 
+	padding-top: 10px;}
 
 #upload-image{
 	padding: 10px 20px;
