@@ -19,6 +19,7 @@ public class GalleryService {
 	
 	public Boolean removeImage(Long no) {
 		return galleryRepository.delete(no) == 1;
+		
 	}
 	
 	public Boolean saveImage(GalleryVo vo) {

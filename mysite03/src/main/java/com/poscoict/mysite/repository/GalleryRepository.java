@@ -19,7 +19,7 @@ public class GalleryRepository {
 	}
 
 	public int delete(Long no) {
-		return sqlSession.delete("gallery.delete");
+		return sqlSession.delete("gallery.delete", no);
 	}
 
 	public int insert(GalleryVo vo) {
