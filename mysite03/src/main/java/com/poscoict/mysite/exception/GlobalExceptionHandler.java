@@ -40,12 +40,12 @@ public class GlobalExceptionHandler {
 		
 		String accept = request.getHeader("accept");
 		
-		if(accept.matches(".*application.json.*")) {
+		if(accept.matches(".*application/json.*")) {
 			//3.JSON 응답
 			JsonResult result = JsonResult.fail(errors.toString());
 			String jsonString = new ObjectMapper().writeValueAsString(result);
 			
-			response.setContentType("applciation/json;charset=UTF-8");
+			response.setContentType("application/json;charset=UTF-8");
 			
 			OutputStream os = response.getOutputStream();
 			os.write(jsonString.getBytes("utf-8"));
@@ -58,11 +58,6 @@ public class GlobalExceptionHandler {
 			request
 			.getRequestDispatcher("/WEB-INF/views/error/exception.jsp")
 			.forward(request, response);
-		
 		}
-		
-		
-		
-		
 	}
 }
