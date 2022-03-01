@@ -37,7 +37,7 @@
 				alert("이메일이 비어있습니다.");
 				$("#email").focus();
 				return ;
-			}
+			}else if($("email").val() )
 			
 			// 중복체크 유무
 			if ($("#img-checkemail").css("display") === "none") {
