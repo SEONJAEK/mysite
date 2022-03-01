@@ -31,17 +31,36 @@
 				$("#name").focus();
 				return;
 			}
-			//2. 이메일 유효성 체크
 			
-			//3. 중복체크 유무 중복체크 
-			//했는지 안했는지  이미지 상태가 hide상태인지 show상태인지 확인해보면 되지
+			//2. 이메일 유효성 체크//
+			if ($("#email").val() === "") {
+				alert("이메일이 비어있습니다.");
+				$("#email").focus();
+				return ;
+			}
 			
-			//4. 비밀번호 유효성(empty)체크
+			// 중복체크 유무
+			if ($("#img-checkemail").css("display") === "none") {
+				alert("이메일 중복확인을 하지 않았습니다.");
+				return ;
+			}
 			
-			//5. 유효성ok
+			// 비밀번호 유효성(Empty) 체크
+			if ($("#password").val() === "") {
+				alert("비밀번호가 비어있습니다.");
+				$("#password").focus();
+				return ;
+			}
+			
+			// 유효성 ok
 			console.log("ok!!!");
-			//$("#join-form")[0].submit();
+			// $("#join-form")[0].submit();
 		});
+		
+		$("#email").change(function() {
+			$("#img-checkemail").hide();
+			$("#btn-checkemail").show();
+		})
 		
 		
 		
