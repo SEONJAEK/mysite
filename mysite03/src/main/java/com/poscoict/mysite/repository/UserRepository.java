@@ -23,6 +23,7 @@ public class UserRepository {
 	
 	public boolean insert(UserVo vo) {
 		int count = sqlSession.insert("user.insert", vo);
+		System.out.println(count);
 		return count == 1;
 	}
 	
