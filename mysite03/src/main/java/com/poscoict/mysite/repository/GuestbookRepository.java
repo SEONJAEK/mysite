@@ -33,4 +33,8 @@ public class GuestbookRepository {
 	public int insert(GuestbookVo vo) {
 		return sqlSession.insert("guestbook.insert", vo);
 	}
+
+	public List<GuestbookVo> getList(Long LastNo) {
+		return sqlSession.selectList("guestbook.getList", LastNo);
+	}
 }

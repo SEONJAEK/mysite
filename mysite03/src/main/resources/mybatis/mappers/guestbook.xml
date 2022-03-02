@@ -27,4 +27,20 @@
 		</delete>
 		
 		
+		<select id="getList" resultType="guestbookvo" parameterType='Long'>
+			<![CDATA[
+				select no, name, contents, date_format(reg_date, '%Y-%m-%d %h:%i:%s') as regDate
+				from guestbook
+				]]>
+				<if test="_parameter > 0">
+				<![CDATA[
+					where no < #{_parameter}
+				]]>
+				</if> 
+			<![CDATA[
+				order by no desc
+				limit 0, 3
+			]]>
+		</select>
+		
 </mapper>
